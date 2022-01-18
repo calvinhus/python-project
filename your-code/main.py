@@ -5,11 +5,6 @@ couch = {
     "type": "furniture"
 }
 
-queen_bed = = {
-    "name": "queen_bed",
-    "type": "furniture",
-}
-
 door_a = {
     "name": "door a",
     "type": "door"
