@@ -1,5 +1,5 @@
 # define rooms and items
-
+from time import sleep
 couch = {
     "name": "couch",
     "type": "furniture"
@@ -146,6 +146,7 @@ def play_room(room):
     game_state["current_room"] = room
     if(game_state["current_room"] == game_state["target_room"]):
         print("Congrats! You escaped the room!")
+        sleep(10)
     else:
         print("You are now in " + room["name"])
         intended_action = input(
