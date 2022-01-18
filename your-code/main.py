@@ -37,7 +37,7 @@ outside = {
 
 all_rooms = [game_room, outside]
 
-all_doors = [door_a]
+all_doors = [door_a, door_b, door_c, door_d]
 
 # define which items/rooms are related
 
