@@ -31,20 +31,20 @@ key_a = {
     "target": door_a
 }
 
-key_b = { "name": "key for door b",
-          "type": "key",
-          "target": door_b
-}
+key_b = {"name": "key for door b",
+         "type": "key",
+         "target": door_b
+         }
 
-key_c = { "name": "key for door c",
-          "type": "key",
-          "target": door_c
-}
+key_c = {"name": "key for door c",
+         "type": "key",
+         "target": door_c
+         }
 
-key_d = { "name": "key for door d",
-          "type": "key",
-          "target": door_d
-}
+key_d = {"name": "key for door d",
+         "type": "key",
+         "target": door_d
+         }
 
 piano = {
     "name": "piano",
@@ -60,33 +60,33 @@ outside = {
     "name": "outside"
 }
 
-bedroom_1 = {"name": "bedroom 1", 
+bedroom_1 = {"name": "bedroom 1",
              "type": "room"
-}
+             }
 
 bedroom_2 = {"name": "bedroom 2",
-            "type": "room"
-}
+             "type": "room"
+             }
 
 living_room = {"name": "living room",
-             " type": "room"
-}
+               " type": "room"
+               }
 
 queen_bed = {"name": "queen bed",
              "type": "furniture"
-}
+             }
 
 double_bed = {"name": "double bed",
               "type": "furniture"
-}
+              }
 
 dresser = {"name": "dresser",
            "type": "furniture"
-}
+           }
 
 dining_table = {"name": "dining table",
                 "type": "furniture"
-}
+                }
 
 all_rooms = [game_room, outside, bedroom_1, bedroom_2, living_room]
 
@@ -105,7 +105,7 @@ object_relations = {
     "bedroom 2": [double_bed, dresser, door_b],
     "double bed": [key_c],
     "dresser": [key_d],
-    "door c": [bedroom_1,living_room],
+    "door c": [bedroom_1, living_room],
     "living room": [dining_table, door_d],
     "door d": [outside]
 }
@@ -133,7 +133,7 @@ def start_game():
     """
     Start the game
     """
-    print("You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. You don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
+    print("\nYou wake up on a couch and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
     play_room(game_state["current_room"])
 
 
@@ -145,19 +145,19 @@ def play_room(room):
     """
     game_state["current_room"] = room
     if(game_state["current_room"] == game_state["target_room"]):
-        print("Congrats! You escaped the room!")
-        sleep(10)
+        print("\nCongrats! You escaped the room!")
+        sleep(5)
     else:
         print("You are now in " + room["name"])
         intended_action = input(
-            "What would you like to do? Type 'explore' or 'examine'?").strip()
+            "\nWhat would you like to do? Type 'explore' or 'examine'?").strip()
         if intended_action == "explore":
             explore_room(room)
             play_room(room)
         elif intended_action == "examine":
-            examine_item(input("What would you like to examine?").strip())
+            examine_item(input("\nWhat would you like to examine?").strip())
         else:
-            print("Not sure what you mean. Type 'explore' or 'examine'.")
+            print("\nNot sure what you mean. Type 'explore' or 'examine'.")
             play_room(room)
         linebreak()
 
@@ -167,7 +167,7 @@ def explore_room(room):
     Explore a room. List all items belonging to this room.
     """
     items = [i["name"] for i in object_relations[room["name"]]]
-    print("You explore the room. This is " +
+    print("\nYou explore the room. This is " +
           room["name"] + ". You find " + ", ".join(items))
 
 
@@ -199,31 +199,31 @@ def examine_item(item_name):
 
     for item in object_relations[current_room["name"]]:
         if(item["name"] == item_name):
-            output = "You examine " + item_name + ". "
+            output = "\nYou examine " + item_name + ". "
             if(item["type"] == "door"):
                 have_key = False
                 for key in game_state["keys_collected"]:
                     if(key["target"] == item):
                         have_key = True
                 if(have_key):
-                    output += "You unlock it with a key you have."
+                    output += "\nYou unlock it with a key you have."
                     next_room = get_next_room_of_door(item, current_room)
                 else:
-                    output += "It is locked but you don't have the key."
+                    output += "\nIt is locked but you don't have the key."
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]]) > 0):
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
-                    output += "You find " + item_found["name"] + "."
+                    output += "\nYou find " + item_found["name"] + "."
                 else:
-                    output += "There isn't anything interesting about it."
+                    output += "\nThere isn't anything interesting about it."
             print(output)
             break
 
     if(output is None):
-        print("The item you requested is not found in the current room.")
+        print("\nThe item you requested is not found in the current room.")
 
-    if(next_room and input("Do you want to go to the next room? Ener 'yes' or 'no'").strip() == 'yes'):
+    if(next_room and input("\nDo you want to go to the next room? Enter 'yes' or 'no': ").strip() == 'yes'):
         play_room(next_room)
     else:
         play_room(current_room)
