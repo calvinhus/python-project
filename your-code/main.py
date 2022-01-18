@@ -5,6 +5,11 @@ couch = {
     "type": "furniture",
 }
 
+queen_bed = = {
+    "name": "queen_bed",
+    "type": "furniture",
+}
+
 door_a = {
     "name": "door a",
     "type": "door",
@@ -54,8 +59,17 @@ all_doors = [door_a, door_b, door_c, door_d]
 object_relations = {
     "game room": [couch, piano, door_a],
     "piano": [key_a],
-    "outside": [door_a],
-    "door a": [game_room, outside]
+    "outside": [door_d],
+    "door a": [game_room, bedroom_1],
+    "bedroom_1": [queen_bed, door_b, door_c],
+    "queen_bed": [key_b],
+    "door_b": [bedroom_1, bedroom_2],
+    "bedroom_2": [double_bed, dresser, door_b],
+    "double_bed": [key_c],
+    "dresser": [key_d],
+    "door_c": [bedroom_1,living_room],
+    "living_room": [dining_table, door_d],
+    "door_d": [outside]
 }
 
 # define game state. Do not directly change this dict.
