@@ -20,6 +20,11 @@ door_c = {
     "type": "door"
 }
 
+door_d = {
+    "name": "door d",
+    "type": "door",
+}
+
 key_a = {
     "name": "key for door a",
     "type": "key",
@@ -85,7 +90,7 @@ dining_table = {"name": "dinig table",
 
 all_rooms = [game_room, outside, bedroom_1, bedroom_2, living_room]
 
-all_doors = [door_a]
+all_doors = [door_a, door_b, door_c, door_d]
 
 # define which items/rooms are related
 
