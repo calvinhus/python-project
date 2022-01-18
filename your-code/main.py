@@ -1,5 +1,10 @@
 # define rooms and items
 from time import sleep
+import os
+
+# win sound effect path
+file = '/Users/calvinho/IRONHACK/w1/project/python-project/your-code/sound/win.wav'
+
 couch = {
     "name": "couch",
     "type": "furniture"
@@ -146,6 +151,7 @@ def play_room(room):
     game_state["current_room"] = room
     if(game_state["current_room"] == game_state["target_room"]):
         print("\nCongrats! You escaped the room!")
+        os.system("afplay " + file)
         sleep(5)
     else:
         print("You are now in " + room["name"])
