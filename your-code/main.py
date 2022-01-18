@@ -2,28 +2,43 @@
 
 couch = {
     "name": "couch",
-    "type": "furniture",
+    "type": "furniture"
 }
 
 door_a = {
     "name": "door a",
-    "type": "door",
+    "type": "door"
 }
 
 door_b = {
     "name": "door b",
-    "type": "door",
+    "type": "door"
 }
 
 door_c = {
     "name": "door c",
-    "type": "door",
+    "type": "door"
 }
 
 key_a = {
     "name": "key for door a",
     "type": "key",
-    "target": door_a,
+    "target": door_a
+}
+
+key_b = { "name": "key for door b",
+          "type": "key",
+          "target": door_b
+}
+
+key_c = { "name": "key for door c",
+          "type": "key",
+          "target": door_c
+}
+
+key_d = { "name": "key for door d",
+          "type": "key",
+          "target": door_d
 }
 
 piano = {
@@ -33,14 +48,42 @@ piano = {
 
 game_room = {
     "name": "game room",
-    "type": "room",
+    "type": "room"
 }
 
 outside = {
     "name": "outside"
 }
 
-all_rooms = [game_room, outside]
+bedroom_1 = {"name": "bedroom 1", 
+             "type": "room"
+}
+
+bedroom_2 = {"name": "bedroom 2",
+            "type": "room"
+}
+
+living_room = {"name": "living room",
+             " type": "room"
+}
+
+queen_bed = {"name": "queen bed",
+             "type": "furniture"
+}
+
+double_bed = {"name": "double bed",
+              "type": "furniture"
+}
+
+dresser = {"name": "dresser",
+           "type": "furniture"
+}
+
+dining_table = {"name": "dinig table",
+                "type": "furniture"
+}
+
+all_rooms = [game_room, outside, bedroom_1, bedroom_2, living_room]
 
 all_doors = [door_a]
 
