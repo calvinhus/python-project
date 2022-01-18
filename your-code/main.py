@@ -10,6 +10,11 @@ door_a = {
     "type": "door",
 }
 
+door_b = {
+    "name": "door b",
+    "type": "door",
+}
+
 key_a = {
     "name": "key for door a",
     "type": "key",
