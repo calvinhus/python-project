@@ -99,15 +99,15 @@ object_relations = {
     "piano": [key_a],
     "outside": [door_d],
     "door a": [game_room, bedroom_1],
-    "bedroom_1": [queen_bed, door_b, door_c],
-    "queen_bed": [key_b],
-    "door_b": [bedroom_1, bedroom_2],
-    "bedroom_2": [double_bed, dresser, door_b],
-    "double_bed": [key_c],
+    "bedroom 1": [queen_bed, door_a, door_b, door_c],
+    "queen bed": [key_b],
+    "door b": [bedroom_1, bedroom_2],
+    "bedroom 2": [double_bed, dresser, door_b],
+    "double bed": [key_c],
     "dresser": [key_d],
-    "door_c": [bedroom_1,living_room],
-    "living_room": [dining_table, door_d],
-    "door_d": [outside]
+    "door c": [bedroom_1,living_room],
+    "living room": [dining_table, door_d],
+    "door d": [outside]
 }
 
 # define game state. Do not directly change this dict.
