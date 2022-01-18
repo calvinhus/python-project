@@ -89,7 +89,7 @@ dresser = {"name": "dresser",
            "type": "furniture"
 }
 
-dining_table = {"name": "dinig table",
+dining_table = {"name": "dining table",
                 "type": "furniture"
 }
 
