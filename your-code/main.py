@@ -6,7 +6,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
-plt.close()
+
 relative_path = os.getcwd()
 game_sound = relative_path + '/your-code/sound/time.wav'
 end_sound = relative_path + '/your-code/sound/do_it_end.wav'
@@ -150,6 +150,14 @@ INIT_GAME_STATE = {
 }
 
 try:
+    def screen_clear():
+        # for mac and linux
+        if os.name == 'posix':
+            _ = os.system('clear')
+        else:
+            # for windows
+            _ = os.system('cls')
+
     def linebreak():
         """
         Print a line break
@@ -160,6 +168,7 @@ try:
         """
         Start the game
         """
+        screen_clear()
         print("\nYou wake up on a whiteboard and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
         play_room(game_state["current_room"])
 
@@ -173,16 +182,15 @@ try:
         if(game_state["current_room"] == game_state["target_room"]):
             print("\nCongrats! You escaped the room!")
             os.system(player + end_sound)
-            sleep(5)
             plt.close()
         else:
             print("You are now in " + room["name"])
             intended_action = input(
                 "\nWhat would you like to do? Type 'explore' or 'examine'?").strip()
-            if intended_action == "explore":
+            if intended_action.lower() == "explore":
                 explore_room(room)
                 play_room(room)
-            elif intended_action == "examine":
+            elif intended_action.lower() == "examine":
                 examine_item(
                     input("\nWhat would you like to examine?").strip())
             else:
@@ -249,7 +257,7 @@ try:
         if(output is None):
             print("\nThe item you requested is not found in the current room.")
 
-        if(next_room and input("\nDo you want to go to the next module? Enter 'yes' or 'no': ").strip() == 'yes'):
+        if(next_room and input("\nDo you want to go to the next module? Enter 'yes' or 'no': ").strip().lower() == 'yes'):
             play_room(next_room)
         else:
             play_room(current_room)
