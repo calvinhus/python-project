@@ -3,116 +3,122 @@ from time import sleep
 import os
 
 # win sound effect path
-file = '/Users/calvinho/IRONHACK/w1/project/python-project/your-code/sound/win.wav'
+if os.name == 'posix':
+    player = "afplay "
+else:
+    player = "start "
 
-couch = {
-    "name": "couch",
+relative_path = os.getcwd()
+file = relative_path + '/your-code/sound/win.wav'
+
+whiteboard = {
+    "name": "whiteboard",
     "type": "furniture"
 }
 
-door_a = {
-    "name": "door a",
+python_project = {
+    "name": "python project",
     "type": "door"
 }
 
-door_b = {
-    "name": "door b",
+tableau_project = {
+    "name": "tableau project",
     "type": "door"
 }
 
-door_c = {
-    "name": "door c",
+ai_project = {
+    "name": "AI project",
     "type": "door"
 }
 
-door_d = {
-    "name": "door d",
+graduation_d = {
+    "name": "graduation",
     "type": "door",
 }
 
-key_a = {
-    "name": "key for door a",
+python = {
+    "name": "python for python project",
     "type": "key",
-    "target": door_a
+    "target": python_project
 }
 
-key_b = {"name": "key for door b",
-         "type": "key",
-         "target": door_b
-         }
+tableau = {"name": "tableau for tableau project",
+           "type": "key",
+           "target": tableau_project
+           }
 
-key_c = {"name": "key for door c",
-         "type": "key",
-         "target": door_c
-         }
+sklearn = {"name": "sklearn for AI project",
+           "type": "key",
+           "target": ai_project
+           }
 
-key_d = {"name": "key for door d",
-         "type": "key",
-         "target": door_d
-         }
+soft_skills = {"name": "soft skills",
+               "type": "key",
+               "target": graduation_d
+               }
 
-piano = {
-    "name": "piano",
+computer = {
+    "name": "computer",
     "type": "furniture",
 }
 
-game_room = {
-    "name": "game room",
+mod_1 = {
+    "name": "module 1",
     "type": "room"
 }
 
-outside = {
-    "name": "outside"
+grad_party = {
+    "name": "grad_party"
 }
 
-bedroom_1 = {"name": "bedroom 1",
-             "type": "room"
-             }
+mod_2 = {"name": "module 2",
+         "type": "room"
+         }
 
-bedroom_2 = {"name": "bedroom 2",
-             "type": "room"
-             }
+mod_3 = {"name": "module 3",
+         "type": "room"
+         }
 
-living_room = {"name": "living room",
+career_hack = {"name": "careerhack",
                " type": "room"
                }
 
-queen_bed = {"name": "queen bed",
+lecture_1 = {"name": "lecture",
              "type": "furniture"
              }
 
-double_bed = {"name": "double bed",
+presentation_1 = {"name": "presentation",
+                  "type": "furniture"
+                  }
+
+# lab = {"name": "lab",
+#       "type": "furniture"
+#       }
+
+one_on_one = {"name": "one-on-one",
               "type": "furniture"
               }
 
-dresser = {"name": "dresser",
-           "type": "furniture"
-           }
+all_rooms = [mod_1, grad_party, mod_2, mod_3, career_hack]
 
-dining_table = {"name": "dining table",
-                "type": "furniture"
-                }
-
-all_rooms = [game_room, outside, bedroom_1, bedroom_2, living_room]
-
-all_doors = [door_a, door_b, door_c, door_d]
+all_doors = [python_project, tableau_project, ai_project, graduation_d]
 
 # define which items/rooms are related
 
 object_relations = {
-    "game room": [couch, piano, door_a],
-    "piano": [key_a],
-    "outside": [door_d],
-    "door a": [game_room, bedroom_1],
-    "bedroom 1": [queen_bed, door_a, door_b, door_c],
-    "queen bed": [key_b],
-    "door b": [bedroom_1, bedroom_2],
-    "bedroom 2": [double_bed, dresser, door_b],
-    "double bed": [key_c],
-    "dresser": [key_d],
-    "door c": [bedroom_1, living_room],
-    "living room": [dining_table, door_d],
-    "door d": [outside]
+    "module 1": [whiteboard, computer, python_project],
+    "computer": [python],
+    "grad_party": [graduation_d],
+    "python project": [mod_1, mod_2],
+    "module 2": [lecture_1, python_project, tableau_project],
+    "lecture": [tableau],
+    "tableau project": [mod_2, mod_3],
+    "module 3": [presentation_1, tableau_project, ai_project],
+    "presentation": [sklearn],
+    "one-on-one": [soft_skills],
+    "AI project": [career_hack, mod_3],
+    "careerhack": [one_on_one, graduation_d, ai_project],
+    "graduation": [grad_party]
 }
 
 # define game state. Do not directly change this dict.
@@ -121,9 +127,9 @@ object_relations = {
 # way you can replay the game multiple times.
 
 INIT_GAME_STATE = {
-    "current_room": game_room,
+    "current_room": mod_1,
     "keys_collected": [],
-    "target_room": outside
+    "target_room": grad_party
 }
 
 
@@ -138,7 +144,7 @@ def start_game():
     """
     Start the game
     """
-    print("\nYou wake up on a couch and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
+    print("\nYou wake up on a whiteboard and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
     play_room(game_state["current_room"])
 
 
@@ -151,7 +157,7 @@ def play_room(room):
     game_state["current_room"] = room
     if(game_state["current_room"] == game_state["target_room"]):
         print("\nCongrats! You escaped the room!")
-        os.system("afplay " + file)
+        os.system(player + file)
         sleep(5)
     else:
         print("You are now in " + room["name"])
@@ -173,7 +179,7 @@ def explore_room(room):
     Explore a room. List all items belonging to this room.
     """
     items = [i["name"] for i in object_relations[room["name"]]]
-    print("\nYou explore the room. This is " +
+    print("\nYou explore it. This is " +
           room["name"] + ". You find " + ", ".join(items))
 
 
@@ -212,7 +218,7 @@ def examine_item(item_name):
                     if(key["target"] == item):
                         have_key = True
                 if(have_key):
-                    output += "\nYou unlock it with a key you have."
+                    output += "\nYou delivered the project!"
                     next_room = get_next_room_of_door(item, current_room)
                 else:
                     output += "\nIt is locked but you don't have the key."
@@ -229,7 +235,7 @@ def examine_item(item_name):
     if(output is None):
         print("\nThe item you requested is not found in the current room.")
 
-    if(next_room and input("\nDo you want to go to the next room? Enter 'yes' or 'no': ").strip() == 'yes'):
+    if(next_room and input("\nDo you want to go to the next module? Enter 'yes' or 'no': ").strip() == 'yes'):
         play_room(next_room)
     else:
         play_room(current_room)
