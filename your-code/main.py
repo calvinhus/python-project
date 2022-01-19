@@ -174,7 +174,7 @@ try:
         global startTime
         screen_clear()
         startTime = datetime.now()
-        print("\nYou wake up on a whiteboard and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
+        print("\nWelcome you have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks and you must give it your all!\nIn your class there is a whiteboard and a few other objects.\nYou have never done this before.\nBut you feel excited to learn, try to graduate NOW!\n")
         play_room(game_state["current_room"])
 
     def play_room(room):
@@ -238,7 +238,7 @@ try:
         output = None
 
         for item in object_relations[current_room["name"]]:
-            if(item["name"] == item_name):
+            if(item["name"] == item_name.strip().lower()):
                 output = "\nYou examine " + item_name + ". "
                 if(item["type"] == "door"):
                     have_key = False
