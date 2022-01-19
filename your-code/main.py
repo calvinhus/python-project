@@ -2,22 +2,25 @@
 import pygame
 from time import sleep
 import os
-
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
+from datetime import datetime
 
+# get path of sound files
 relative_path = os.getcwd()
 game_sound = relative_path + '/your-code/sound/time.wav'
 end_sound = relative_path + '/your-code/sound/do_it_end.wav'
+
+# open image with game map
 ImageAddress = relative_path + "/escape-room-plan.jpg"
 ImageItself = Image.open(ImageAddress)
 ImageNumpyFormat = np.asarray(ImageItself)
 plt.imshow(ImageNumpyFormat)
+plt.axis('off')
 plt.draw()
-plt.pause(5)  # pause how many seconds
-# plt.close()
-# win sound effect path
+plt.pause(1)
+# set music player depending on OS
 if os.name == 'posix':
     player = "afplay "
 else:
@@ -168,7 +171,9 @@ try:
         """
         Start the game
         """
+        global startTime
         screen_clear()
+        startTime = datetime.now()
         print("\nYou wake up on a whiteboard and find yourself in a strange house with no windows which you have never been to before.\nYou don't remember why you are here and what had happened before.\nYou feel some unknown danger is approaching and you must get out of the house, NOW!\n")
         play_room(game_state["current_room"])
 
@@ -180,7 +185,8 @@ try:
         """
         game_state["current_room"] = room
         if(game_state["current_room"] == game_state["target_room"]):
-            print("\nCongrats! You escaped the room!")
+            print(
+                f"\nCongrats! You escaped the room in {datetime.now() - startTime}!")
             os.system(player + end_sound)
             plt.close()
         else:
@@ -257,7 +263,7 @@ try:
         if(output is None):
             print("\nThe item you requested is not found in the current room.")
 
-        if(next_room and input("\nDo you want to go to the next module? Enter 'yes' or 'no': ").strip().lower() == 'yes'):
+        if(next_room and input("\nDo you want to go to the next module? Yes [y] or No [n]: ").strip().lower() == 'y'):
             play_room(next_room)
         else:
             play_room(current_room)
