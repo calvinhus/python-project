@@ -13,9 +13,10 @@ game_sound = relative_path + '/your-code/sound/time.wav'
 end_sound = relative_path + '/your-code/sound/do_it_end.wav'
 
 # open image with game map
-ImageAddress = relative_path + "/escape-room-plan.jpg"
+ImageAddress = relative_path + "/new_map.jpg"
 ImageItself = Image.open(ImageAddress)
 ImageNumpyFormat = np.asarray(ImageItself)
+plt.figure(figsize=(20, 10), dpi=50)
 plt.imshow(ImageNumpyFormat)
 plt.axis('off')
 plt.draw()
@@ -174,7 +175,7 @@ try:
         global startTime
         screen_clear()
         startTime = datetime.now()
-        print("\nWelcome you have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks and you must give it your all!\nIn your class there is a whiteboard and a few other objects.\nYou have never done this before.\nBut you feel excited to learn, try to graduate NOW!\n")
+        print("\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks long and you must give it all!\nIn your class there is a whiteboard and a few other objects.\nYou have never done this before.\nBut you feel excited to learn, try to graduate NOW!\n")
         play_room(game_state["current_room"])
 
     def play_room(room):
@@ -185,22 +186,23 @@ try:
         """
         game_state["current_room"] = room
         if(game_state["current_room"] == game_state["target_room"]):
+            seconds = (datetime.now() - startTime).total_seconds()
             print(
-                f"\nCongrats! You escaped the room in {datetime.now() - startTime}!")
+                f"\nCongrats! You escaped the room in {round(seconds,1)} seconds!")
             os.system(player + end_sound)
             plt.close()
         else:
             print("You are now in " + room["name"])
             intended_action = input(
-                "\nWhat would you like to do? Type 'explore' or 'examine'?").strip()
-            if intended_action.lower() == "explore":
+                "\nWhat would you like to do? Explore [1] or Examine [2] ?").strip()
+            if intended_action.lower() == "1":
                 explore_room(room)
                 play_room(room)
-            elif intended_action.lower() == "examine":
+            elif intended_action.lower() == "2":
                 examine_item(
                     input("\nWhat would you like to examine?").strip())
             else:
-                print("\nNot sure what you mean. Type 'explore' or 'examine'.")
+                print("\nNot sure what you mean. Explore [1] or Examine [2] ?")
                 play_room(room)
             linebreak()
 
