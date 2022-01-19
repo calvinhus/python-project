@@ -238,8 +238,8 @@ try:
         output = None
 
         for item in object_relations[current_room["name"]]:
-            if(item["name"] == item_name.strip().lower()):
-                output = "\nYou examine " + item_name + ". "
+            if(item["name"].lower() == item_name.strip().lower()):
+                output = "\nYou examine " + item_name.strip().lower() + ". "
                 if(item["type"] == "door"):
                     have_key = False
                     for key in game_state["keys_collected"]:
