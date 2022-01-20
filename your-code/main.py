@@ -194,7 +194,7 @@ try:
         else:
             print("You are now in " + room["name"])
             intended_action = input(
-                "\nWhat would you like to do? Explore [1] or Examine [2] ?").strip()
+                "\nWhat would you like to do? Explore [1] or Examine [2] ? ").strip()
             if intended_action.lower() == "1":
                 explore_room(room)
                 play_room(room)
