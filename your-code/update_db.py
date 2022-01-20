@@ -11,7 +11,7 @@ def show_leaders():
     
     print("\n\n\t---LEADERBOARD---\n\n")
     for l in leaders:
-        print(f"User: {l[0]}\tScore: {l[1]}\n")
+        print(f"User: {l[0]}\tScore: {l[1]} seconds\n")
     
     # Commit the transaction
     conn.commit()

@@ -1,3 +1,4 @@
+from ast import Mod
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 import pygame
@@ -85,7 +86,7 @@ computer = {
 }
 
 mod_1 = {
-    "name": "module 1",
+    "name": "Module 1",
     "type": "room"
 }
 
@@ -93,11 +94,11 @@ grad_party = {
     "name": "grad_party"
 }
 
-mod_2 = {"name": "module 2",
+mod_2 = {"name": "Module 2",
          "type": "room"
          }
 
-mod_3 = {"name": "module 3",
+mod_3 = {"name": "Module 3",
          "type": "room"
          }
 
@@ -117,7 +118,7 @@ presentation_1 = {"name": "presentation",
 #       "type": "furniture"
 #       }
 
-one_on_one = {"name": "one-on-one",
+one_on_one = {"name": "one on one",
               "type": "furniture"
               }
 
@@ -128,16 +129,16 @@ all_doors = [python_project, tableau_project, ai_project, graduation_d]
 # define which items/rooms are related
 
 object_relations = {
-    "module 1": [whiteboard, computer, python_project],
+    "Module 1": [whiteboard, computer, python_project],
     "computer": [python],
     "grad_party": [graduation_d],
     "python project": [mod_1, mod_2],
-    "module 2": [lecture_1, python_project, tableau_project],
+    "Module 2": [lecture_1, python_project, tableau_project],
     "lecture": [tableau],
     "tableau project": [mod_2, mod_3],
-    "module 3": [presentation_1, tableau_project, ai_project],
+    "Module 3": [presentation_1, tableau_project, ai_project],
     "presentation": [sklearn],
-    "one-on-one": [soft_skills],
+    "one on one": [soft_skills],
     "AI project": [career_hack, mod_3],
     "careerhack": [one_on_one, graduation_d, ai_project],
     "graduation": [grad_party]
@@ -176,8 +177,10 @@ try:
         global startTime, user
         screen_clear()
         startTime = datetime.now()
-        print("\n\n\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks long and you must give it all!\nYou have never done this before, but you feel excited to learn\nTry to graduate NOW!\n")
+        print("\n\n\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIt's 9 weeks long and you must give it all!\nYou have never done this before, but you feel excited to learn.\nTry to graduate NOW!\n")
         user = input("\nPlease enter your name: ").strip()
+        sleep(3)
+        screen_clear()
         play_room(game_state["current_room"])
 
     def play_room(room):
@@ -190,9 +193,10 @@ try:
         if(game_state["current_room"] == game_state["target_room"]):
             seconds = (datetime.now() - startTime).total_seconds()
             total_time = round(seconds,1)
-            mydb.update_database([user,total_time])
+            mydb.update_database([user.capitalize(),total_time])
             print(
-                f"\nCongrats! You escaped the room in {total_time} seconds!")
+                f"\nCongrats! You finished the bootcamp in {total_time} seconds!")
+            pygame.mixer.music.stop()
             os.system(player + end_sound)
             
             # Call method from our library to show the leaderboard
