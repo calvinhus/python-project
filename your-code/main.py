@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
 
-
-
 # get path of sound files
 relative_path = os.getcwd()
 game_sound = relative_path + '/your-code/sound/time.wav'
@@ -18,16 +16,14 @@ end_sound = relative_path + '/your-code/sound/do_it_end.wav'
 ImageAddress = relative_path + "/new_map.jpg"
 ImageItself = Image.open(ImageAddress)
 ImageNumpyFormat = np.asarray(ImageItself)
-plt.figure(figsize=(20, 10), dpi=50)
+plt.figure(figsize=(12, 5), dpi=100)
 plt.imshow(ImageNumpyFormat)
 plt.axis('off')
 plt.draw()
 plt.pause(1)
+
 # set music player depending on OS
-if os.name == 'posix':
-    player = "afplay "
-else:
-    player = "start "
+player = "afplay " if os.name == 'posix' else "start "
 
 
 pygame.mixer.init()
@@ -178,7 +174,7 @@ try:
         global startTime
         screen_clear()
         startTime = datetime.now()
-        print("\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks long and you must give it all!\nIn your class there is a whiteboard and a few other objects.\nYou have never done this before.\nBut you feel excited to learn, try to graduate NOW!\n")
+        print("\n\n\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks long and you must give it all!\nYou have never done this before, but you feel excited to learn\nTry to graduate NOW!\n")
         play_room(game_state["current_room"])
 
     def play_room(room):
@@ -274,7 +270,7 @@ try:
             play_room(current_room)
 
     game_state = INIT_GAME_STATE.copy()
-
+    print("\n"*100)
     start_game()
 except KeyboardInterrupt:
     plt.close()
