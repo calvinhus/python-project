@@ -1,11 +1,13 @@
-# define rooms and items
-import pygame
-from time import sleep
 import os
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+import pygame
 from datetime import datetime
+from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
+from time import sleep
+
+
 
 # get path of sound files
 relative_path = os.getcwd()
@@ -32,6 +34,7 @@ pygame.mixer.init()
 pygame.mixer.music.load(game_sound)
 pygame.mixer.music.play()
 
+# define rooms and items
 whiteboard = {
     "name": "whiteboard",
     "type": "furniture"
