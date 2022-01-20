@@ -11,7 +11,7 @@ import update_db as mydb
 
 # get path of sound files
 relative_path = os.getcwd()
-game_sound = relative_path + '/your-code/sound/time.wav'
+game_sound = relative_path + '/your-code/sound/pink_floyd.wav'
 end_sound = relative_path + '/your-code/sound/do_it_end.wav'
 
 # open image with game map
