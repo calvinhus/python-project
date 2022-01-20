@@ -6,7 +6,7 @@ def show_leaders():
     conn = sqlite3.connect('leaderboard.db')
     # Create cursor
     c = conn.cursor()
-    c.execute("SELECT * FROM leader LIMIT 3")
+    c.execute("SELECT * FROM leader ORDER BY TIME LIMIT 3")
     leaders = c.fetchall()
     
     print("\n\n\t---LEADERBOARD---\n\n")

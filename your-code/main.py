@@ -1,4 +1,3 @@
-from ast import Mod
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 import pygame
@@ -7,7 +6,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
-
 import update_db as mydb
 
 # get path of sound files
