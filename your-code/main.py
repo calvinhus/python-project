@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
 
+import update_db as mydb
+
 # get path of sound files
 relative_path = os.getcwd()
 game_sound = relative_path + '/your-code/sound/time.wav'
@@ -171,10 +173,11 @@ try:
         """
         Start the game
         """
-        global startTime
+        global startTime, user
         screen_clear()
         startTime = datetime.now()
         print("\n\n\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIts 9 weeks long and you must give it all!\nYou have never done this before, but you feel excited to learn\nTry to graduate NOW!\n")
+        user = input("\nPlease enter your name: ").strip()
         play_room(game_state["current_room"])
 
     def play_room(room):
@@ -186,9 +189,15 @@ try:
         game_state["current_room"] = room
         if(game_state["current_room"] == game_state["target_room"]):
             seconds = (datetime.now() - startTime).total_seconds()
+            total_time = round(seconds,1)
+            mydb.update_database([user,total_time])
             print(
-                f"\nCongrats! You escaped the room in {round(seconds,1)} seconds!")
+                f"\nCongrats! You escaped the room in {total_time} seconds!")
             os.system(player + end_sound)
+            
+            # Call method from our library to show the leaderboard
+            mydb.show_leaders()
+            sleep(10)
             plt.close()
         else:
             print("You are now in " + room["name"])
