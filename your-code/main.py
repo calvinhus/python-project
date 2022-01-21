@@ -177,7 +177,7 @@ try:
         startTime = datetime.now()
         print("\n\n\nWelcome!\nYou have entered the Ironhack Data Analytics Bootcamp!\nIt's 9 weeks long and you must give it all!\nYou have never done this before, but you feel excited to learn.\nTry to graduate NOW!\n")
         user = input("\nPlease enter your name: ").strip()
-        sleep(3)
+        sleep(2)
         screen_clear()
         play_room(game_state["current_room"])
 
@@ -193,13 +193,12 @@ try:
             total_time = round(seconds,1)
             mydb.update_database([user.capitalize(),total_time])
             print(
-                f"\nCongrats! You finished the bootcamp in {total_time} seconds!")
+                f"\nCongrats {user}! You finished the bootcamp in {total_time} seconds!")
             pygame.mixer.music.stop()
             os.system(player + end_sound)
-            
             # Call method from our library to show the leaderboard
             mydb.show_leaders()
-            sleep(10)
+            sleep(7)
             plt.close()
         else:
             print("You are now in " + room["name"])
@@ -251,7 +250,7 @@ try:
 
         for item in object_relations[current_room["name"]]:
             if(item["name"].lower() == item_name.strip().lower()):
-                output = "\nYou examine " + item_name.strip().lower() + ". "
+                output = "\nYou try " + item_name.strip().lower() + ". "
                 if(item["type"] == "door"):
                     have_key = False
                     for key in game_state["keys_collected"]:
@@ -261,7 +260,7 @@ try:
                         output += "\nYou delivered the project!"
                         next_room = get_next_room_of_door(item, current_room)
                     else:
-                        output += "\nIt is locked but you don't have the key."
+                        output += "\nLooks like you still don't have the skill for it."
                 else:
                     if(item["name"] in object_relations and len(object_relations[item["name"]]) > 0):
                         item_found = object_relations[item["name"]].pop()
